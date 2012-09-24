@@ -41,10 +41,10 @@
    the objectClass attribute to a set."
   [attr]
   (let [k (keyword (.getName attr))]
-    (cond
-      (= :objectClass k)     [k (set (vec (.getValues attr)))]
-      (> (.size attr) 1)     [k (vec (.getValues attr))]
-      :else                  [k (.getValue attr)])))
+    (if
+      (= :objectClass k)
+      [k (set (vec (.getValues attr)))]
+      [k (vec (.getValues attr))])))
 
 (defn- entry-as-map
   "Converts an Entry object into a map optionally adding the DN"
